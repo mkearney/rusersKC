@@ -208,9 +208,11 @@ file_name &lt;- file.path(home_directory, &quot;twitter_token.rds&quot;)
 saveRDS(twitter_token, file = file_name)
 </code></pre>
 
-<h2>Set environment variable</h2>
+</article>
 
-<pre><code class="r">## On my mac, the .Renviron text looks like this:
+<article class="" id="slide-16" style="background:;">
+  <h3>Set environment variable</h3>
+  <pre><code class="r">## On my mac, the .Renviron text looks like this:
 ##     TWITTER_PAT=/Users/mwk/twitter_token.rds
 
 ## assuming you followed the procodures to create &quot;file_name&quot;
@@ -223,13 +225,132 @@ cat(paste0(&quot;TWITTER_PAT=&quot;, file_name),
 
 </article>
 
-<article class="transition" id="slide-16" style="background:;">
+<article class="transition" id="slide-17" style="background:;">
   <h3>&nbsp;</h3>
   <h1 class="mytransition">rtweet functions</h1>
 
 </article>
 
-<article class="" id="slide-17" style="background:;">
+<article class="" id="slide-18" style="background:;">
+  <h3>Get followers</h3>
+  <pre><code class="r">## get most recent 75k followers
+flw1 &lt;- get_followers(&quot;realdonaldtrump&quot;, n = 75000)
+flw1
+## # A tibble: 75,000 x 1
+##               user_id
+##                 &lt;chr&gt;
+##  1 861962717929680896
+##  2 873573516393803776
+##  3 873572121561124864
+##  4 873573581451657216
+##  5 873562392952676352
+##  6 873573260625158144
+##  7 873573740864561152
+##  8 873573140814802944
+##  9 871801684510507008
+## 10 873573061219504128
+</code></pre>
+
+</article>
+
+<article class="" id="slide-19" style="background:;">
+  <h3>Get more followers</h3>
+  <pre><code class="r">## set page value using next cursor extractor
+page &lt;- next_cursor(flw1)
+page
+## [1] &quot;1569708984537163520&quot;
+
+## use page value to continue where left off
+flw2 &lt;- get_followers(
+    &quot;realdonaldtrump&quot;, n = 75000, page = page)
+</code></pre>
+
+</article>
+
+<article class="" id="slide-20" style="background:;">
+  <h3>Get friends</h3>
+  <pre><code class="r">## get list of accounts followed BY a user
+fds &lt;- get_friends(&quot;kearneymw&quot;)
+fds
+## # A tibble: 962 x 1
+##              user_id
+##                &lt;chr&gt;
+## 1 843078227488915456
+## 2 835148691593887744
+## 3 795751822585688064
+## 4 707260960491376640
+## 5         1349865410
+## 6 836165272780345344
+## 7             428333
+## 8          227812077
+## 9 859179631664021504
+## 10          337950234
+## # ... with 952 more rows
+
+next_cursor(fds)
+## [1] &quot;0&quot;
+</code></pre>
+
+</article>
+
+<article class="" id="slide-21" style="background:;">
+  <h3>Search tweets</h3>
+  <pre><code class="r">rt &lt;- search_tweets(
+    &quot;rstats&quot;, n = 300, include_rts = FALSE, exact = TRUE)
+## Searching for tweets...
+## Finished collecting tweets!
+
+rt
+## # A tibble: 300 x 35
+##        screen_name            user_id          created_at          status_id
+##              &lt;chr&gt;              &lt;chr&gt;              &lt;dttm&gt;              &lt;chr&gt;
+##  1            phnk           14460093 2017-06-10 16:16:14 873574535358029824
+##  2      jletteboer           92526801 2017-06-10 16:12:47 873573666776391680
+##  3 BigDataInsights           89191817 2017-06-10 16:12:42 873573649416163328
+##  4 CRANberriesFeed          233585808 2017-06-10 16:02:18 873571030740201473
+##  5   DeborahTannon 821976676842242050 2017-06-10 16:00:52 873570670097182721
+##  6 AnalyticsVidhya         2311645130 2017-06-10 16:00:18 873570526085697537
+##  7 EdwardEgrosFox4           15553592 2017-06-10 15:59:12 873570249186136065
+##  8       Rbloggers          144592995 2017-06-10 15:57:17 873569768019767296
+##  9     geoappsmith         3306901413 2017-06-10 15:56:53 873569666547032064
+## 10      juliasilge           13074042 2017-06-10 15:56:15 873569506215346176
+## # ... with 290 more rows, and 31 more variables: text &lt;chr&gt;,
+## #   retweet_count &lt;int&gt;, favorite_count &lt;int&gt;, is_quote_status &lt;lgl&gt;,
+## #   quote_status_id &lt;chr&gt;, is_retweet &lt;lgl&gt;, retweet_status_id &lt;chr&gt;,
+## #   in_reply_to_status_status_id &lt;chr&gt;, in_reply_to_status_user_id &lt;chr&gt;,
+## #   in_reply_to_status_screen_name &lt;chr&gt;, lang &lt;chr&gt;, source &lt;chr&gt;,
+## #   media_id &lt;chr&gt;, media_url &lt;chr&gt;, media_url_expanded &lt;chr&gt;, urls &lt;chr&gt;,
+## #   urls_display &lt;chr&gt;, urls_expanded &lt;chr&gt;, mentions_screen_name &lt;chr&gt;,
+## #   mentions_user_id &lt;chr&gt;, symbols &lt;lgl&gt;, hashtags &lt;chr&gt;, coordinates &lt;lgl&gt;,
+## #   place_id &lt;chr&gt;, place_type &lt;chr&gt;, place_name &lt;chr&gt;, place_full_name &lt;chr&gt;,
+## #   country_code &lt;chr&gt;, country &lt;chr&gt;, bounding_box_coordinates &lt;chr&gt;,
+## #   bounding_box_type &lt;chr&gt;
+</code></pre>
+
+</article>
+
+<article class="" id="slide-22" style="background:;">
+  <h3>Plain tweets</h3>
+  <pre><code class="r">plain_tweets(rt$text[1:5])
+## [1] &quot;dear if r is executable from microsoft server does that mean that its now technically feasible to run a ddos from r&quot;
+## [2] &quot;networkx tools is out tweets via&quot;
+## [3] &quot;big data insights&quot;
+## [4] &quot;cran updates reins rnetlogo rsentiment&quot;
+## [5] &quot;engaging the tidyverse clean slate protocol&quot;
+</code></pre>
+
+</article>
+
+<article class="dark3" id="slide-23" style="background:;">
+  <h3>Plot</h3>
+  <pre><code class="r">ts_plot(rt, &quot;hours&quot;)
+</code></pre>
+
+<p><img src="images/tsplothours.png" alt=""></p>
+
+</article>
+
+<article class="" id="slide-24" style="background:;">
   <h3>Streaming</h3>
   <pre><code class="r">## comey stream
 comes &lt;- stream_tweets(&quot;comey,trump&quot;, timeout = 60 * 3)
@@ -244,7 +365,7 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="dark3" id="slide-18" style="background:;">
+<article class="dark3" id="slide-25" style="background:;">
   <h3>Sentiment analysis</h3>
   <p><br></p>
 
@@ -254,7 +375,7 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="dark3" id="slide-19" style="background:;">
+<article class="dark3" id="slide-26" style="background:;">
   <h3>&nbsp;</h3>
   <div style="margin-left: auto; margin:right: auto;">
 <img class="sentanalysis" src="images/statecomey.png" alt="statecomey">
@@ -262,7 +383,7 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="dark3" id="slide-20" style="background:;">
+<article class="dark3" id="slide-27" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/worlddensity.png" alt=""></p>
 
@@ -270,13 +391,13 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="sentanalysis" id="slide-21" style="background:;">
+<article class="sentanalysis" id="slide-28" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/sentanalysisprimary.png" alt=""></p>
 
 </article>
 
-<article class="sentanalysis" id="slide-22" style="background:;">
+<article class="sentanalysis" id="slide-29" style="background:;">
   <h3>User networks</h3>
   <ul>
 <li>In my dissertation, I tracked user networks on Twitter during the
@@ -295,25 +416,25 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="sentanalysis" id="slide-23" style="background:;">
+<article class="sentanalysis" id="slide-30" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/ddr2.png" alt=""></p>
 
 </article>
 
-<article class="netanalysis" id="slide-24" style="background:;">
+<article class="netanalysis" id="slide-31" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/polrnetwork.png" alt=""></p>
 
 </article>
 
-<article class="transition" id="slide-25" style="background:;">
+<article class="transition" id="slide-32" style="background:;">
   <h3>&nbsp;</h3>
   <h1 class="mytransition">That's it \o/<br><br>Thanks!</h1>
 
 </article>
 
-<article class="" id="slide-26" style="background:;">
+<article class="" id="slide-33" style="background:;">
   <h3>NA</h3>
   <pre><code class="r">## load state data
 data(&quot;state&quot;)
@@ -332,7 +453,7 @@ for (i in seq_along(state_tweets)) {
 
 </article>
 
-<article class="" id="slide-27" style="background:;">
+<article class="" id="slide-34" style="background:;">
   <h3>Packages</h3>
   <ul>
 <li>httr</li>

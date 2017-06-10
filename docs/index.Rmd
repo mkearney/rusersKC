@@ -83,7 +83,7 @@ University of Missouri</p>
 - Website: [mkearney.github.io/rtweet](https://mkearney.github.io/rtweet)
 - Vignettes:
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, cache=FALSE}
 ## Authorizing API access
 vignette(topic = "auth", package = "rtweet")
 
@@ -93,6 +93,7 @@ vignette(topic = "intro", package = "rtweet")
 ## Streaming API
 vignette(topic = "stream", package = "rtweet")
 ```
+
 
 --- .transition
 
@@ -104,7 +105,7 @@ vignette(topic = "stream", package = "rtweet")
 
 ## Installing and loading rtweet
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, cache=FALSE}
 ## download from CRAN
 install.packages("rtweet")
 
@@ -142,7 +143,7 @@ library(rtweet)
 
 ## Create token
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, cache=FALSE}
 ## whatever name you assigned to your created app
 appname <- "rtweet_token"
 
@@ -163,7 +164,7 @@ twitter_token <- create_token(
 
 ## Save token
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, cache=FALSE}
 ## path of home directory
 home_directory <- path.expand("~/")
 
@@ -174,9 +175,11 @@ file_name <- file.path(home_directory, "twitter_token.rds")
 saveRDS(twitter_token, file = file_name)
 ```
 
+---
+
 ## Set environment variable
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, cache=FALSE}
 ## On my mac, the .Renviron text looks like this:
 ##     TWITTER_PAT=/Users/mwk/twitter_token.rds
 
@@ -196,9 +199,134 @@ cat(paste0("TWITTER_PAT=", file_name),
 
 ---
 
+## Get followers
+
+```{r, eval=FALSE, cache=FALSE}
+## get most recent 75k followers
+flw1 <- get_followers("realdonaldtrump", n = 75000)
+flw1
+## # A tibble: 75,000 x 1
+##               user_id
+##                 <chr>
+##  1 861962717929680896
+##  2 873573516393803776
+##  3 873572121561124864
+##  4 873573581451657216
+##  5 873562392952676352
+##  6 873573260625158144
+##  7 873573740864561152
+##  8 873573140814802944
+##  9 871801684510507008
+## 10 873573061219504128
+```
+
+---
+
+## Get more followers
+
+```{r, eval=FALSE, cache=FALSE}
+## set page value using next cursor extractor
+page <- next_cursor(flw1)
+page
+## [1] "1569708984537163520"
+
+## use page value to continue where left off
+flw2 <- get_followers(
+    "realdonaldtrump", n = 75000, page = page)
+```
+
+---
+
+## Get friends
+
+```{r, eval=FALSE, cache=FALSE}
+## get list of accounts followed BY a user
+fds <- get_friends("kearneymw")
+fds
+## # A tibble: 962 x 1
+##              user_id
+##                <chr>
+## 1 843078227488915456
+## 2 835148691593887744
+## 3 795751822585688064
+## 4 707260960491376640
+## 5         1349865410
+## 6 836165272780345344
+## 7             428333
+## 8          227812077
+## 9 859179631664021504
+## 10          337950234
+## # ... with 952 more rows
+
+next_cursor(fds)
+## [1] "0"
+```
+
+---
+
+## Search tweets
+
+```{r, eval=FALSE, cache=FALSE}
+rt <- search_tweets(
+    "rstats", n = 300, include_rts = FALSE, exact = TRUE)
+## Searching for tweets...
+## Finished collecting tweets!
+
+rt
+## # A tibble: 300 x 35
+##        screen_name            user_id          created_at          status_id
+##              <chr>              <chr>              <dttm>              <chr>
+##  1            phnk           14460093 2017-06-10 16:16:14 873574535358029824
+##  2      jletteboer           92526801 2017-06-10 16:12:47 873573666776391680
+##  3 BigDataInsights           89191817 2017-06-10 16:12:42 873573649416163328
+##  4 CRANberriesFeed          233585808 2017-06-10 16:02:18 873571030740201473
+##  5   DeborahTannon 821976676842242050 2017-06-10 16:00:52 873570670097182721
+##  6 AnalyticsVidhya         2311645130 2017-06-10 16:00:18 873570526085697537
+##  7 EdwardEgrosFox4           15553592 2017-06-10 15:59:12 873570249186136065
+##  8       Rbloggers          144592995 2017-06-10 15:57:17 873569768019767296
+##  9     geoappsmith         3306901413 2017-06-10 15:56:53 873569666547032064
+## 10      juliasilge           13074042 2017-06-10 15:56:15 873569506215346176
+## # ... with 290 more rows, and 31 more variables: text <chr>,
+## #   retweet_count <int>, favorite_count <int>, is_quote_status <lgl>,
+## #   quote_status_id <chr>, is_retweet <lgl>, retweet_status_id <chr>,
+## #   in_reply_to_status_status_id <chr>, in_reply_to_status_user_id <chr>,
+## #   in_reply_to_status_screen_name <chr>, lang <chr>, source <chr>,
+## #   media_id <chr>, media_url <chr>, media_url_expanded <chr>, urls <chr>,
+## #   urls_display <chr>, urls_expanded <chr>, mentions_screen_name <chr>,
+## #   mentions_user_id <chr>, symbols <lgl>, hashtags <chr>, coordinates <lgl>,
+## #   place_id <chr>, place_type <chr>, place_name <chr>, place_full_name <chr>,
+## #   country_code <chr>, country <chr>, bounding_box_coordinates <chr>,
+## #   bounding_box_type <chr>
+```
+
+---
+
+## Plain tweets
+
+```{r, eval=FALSE, cachce=FALSE}
+plain_tweets(rt$text[1:5])
+## [1] "dear if r is executable from microsoft server does that mean that its now technically feasible to run a ddos from r"
+## [2] "networkx tools is out tweets via"
+## [3] "big data insights"
+## [4] "cran updates reins rnetlogo rsentiment"
+## [5] "engaging the tidyverse clean slate protocol"
+```
+
+--- .dark3
+
+## Plot
+
+```{r, eval=FALSE, cache=FALSE}
+ts_plot(rt, "hours")
+```
+
+![](images/tsplothours.png)
+
+---
+
 ## Streaming
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, cache=FALSE}
 ## comey stream
 comes <- stream_tweets("comey,trump", timeout = 60 * 3)
 

@@ -5,7 +5,7 @@ if (!"slidify" %in% installed.packages()) {
 }
 
 
-slidify::knit2slides("../docs/slides.Rmd")
+slidify::knit2slides("../docs/index.Rmd")
 
 browseURL("../docs/slides.html")
 library(rtweet)
