@@ -508,3 +508,9 @@ comes <- tibble::as_tibble(cbind(comes, sa))
 
 <h1 class="mytransition">That's it \o/<br><br>Thanks!</h1>
 
+<style>
+pre .comment {
+color: #999;
+}
+</style>
+
