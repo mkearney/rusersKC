@@ -277,7 +277,6 @@ rate_limit(get_tokens())[1:3, ]
 ## 1             lists/list    15        15 14.975 mins
 ## 2      lists/memberships    75        75 14.975 mins
 ## 3 lists/subscribers/show    15        15 14.975 mins
----
 ```
 
 ---
@@ -490,12 +489,6 @@ comes <- tibble::as_tibble(cbind(comes, sa))
 ![](images/worlddensity.png)
 
 ![](images/popdensity.jpg)
-
---- .sentanalysis
-
-## &nbsp;
-
-![](images/sentanalysisprimary.png)
 
 --- .sentanalysis
 
