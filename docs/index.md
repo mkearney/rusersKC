@@ -27,20 +27,18 @@ University of Missouri</p>
 ---
 
 ## Get these slides
-- Repository: [https://github.com/mkearney/rusersKC](https://github.com/mkearney/rusersKC)
-- Slides: [https://mkearney.github.io/rusersKC](https://mkearney.github.io/rusersKC)
+- Github repository: [https://github.com/mkearney/rusersKC](https://github.com/mkearney/rusersKC)
+- Live version of slides: [https://mkearney.github.io/rusersKC](https://mkearney.github.io/rusersKC)
 
 ---
 
-## My background
-**Education**
+## About me
+**Education and training**
 - PhD in Communication Studies from KU
-  - Grad minor in quantitative psychology
-  - Center for Research Methods & Data Analysis
-
-**Research**
-- Interests are partisanship, selective exposure, new media
-- Dissertation entitled...
+- Center for Research Methods & Data Analysis
+**Research topics**
+- Selective exposure, partisanship, new media, data journalism
+- Dissertation...
 
 ---
 
@@ -101,6 +99,15 @@ vignette(topic = "intro", package = "rtweet")
 vignette(topic = "stream", package = "rtweet")
 ```
 
+- Help:
+
+
+```r
+## list of functions
+help(package = "rtweet")
+```
+
+- My updates: [twitter.com/kearneymw](https://twitter.com/kearneymw)
 
 --- .transition
 
@@ -278,6 +285,36 @@ next_cursor(fds)
 
 ---
 
+## Lookup users
+
+
+```r
+## get users data for my friends
+usrs <- lookup_users(fds$user_id)
+
+usrs
+## # A tibble: 929 x 36
+##               user_id               name     screen_name            location
+##                 <chr>              <chr>           <chr>               <chr>
+##  1 795751822585688064       Scott Harris       sm_kepler        New York, NY
+##  2 707260960491376640   Mohammed Zakaria zakariaCatapult         Chicago, IL
+##  3         1349865410     Marnie Ritchie   marnieritchie          Austin, TX
+##  4 836165272780345344       Stuart Allen    steadystuart                <NA>
+##  5             428333  CNN Breaking News          cnnbrk          Everywhere
+##  6          227812077             rubaie         brubaie               kcmo
+##  7          337950234            tewsie1         tewsie1         Waterloo IA
+##  8           14135384     Seth Ellsworth      pinto4life          Austin, TX
+##  9           57371972 amanda luppes ford         aluppes              Austin
+## 10          224161598     Georgina Cosma         gcosma1 Nottingham, England
+## # ... with 919 more rows, and 32 more variables: description <chr>,
+## #   protected <lgl>, followers_count <int>, friends_count <int>,
+## #   listed_count <int>, created_at <dttm>, favourites_count <int>,
+## #   utc_offset <int>, time_zone <chr>, geo_enabled <lgl>, verified <lgl>,
+## #   statuses_count <int>, lang <chr>, contributors_enabled <lgl> ...
+```
+
+---
+
 ## Search tweets
 
 
@@ -303,15 +340,7 @@ rt
 ## 10      juliasilge           13074042 2017-06-10 15:56:15 873569506215346176
 ## # ... with 290 more rows, and 31 more variables: text <chr>,
 ## #   retweet_count <int>, favorite_count <int>, is_quote_status <lgl>,
-## #   quote_status_id <chr>, is_retweet <lgl>, retweet_status_id <chr>,
-## #   in_reply_to_status_status_id <chr>, in_reply_to_status_user_id <chr>,
-## #   in_reply_to_status_screen_name <chr>, lang <chr>, source <chr>,
-## #   media_id <chr>, media_url <chr>, media_url_expanded <chr>, urls <chr>,
-## #   urls_display <chr>, urls_expanded <chr>, mentions_screen_name <chr>,
-## #   mentions_user_id <chr>, symbols <lgl>, hashtags <chr>, coordinates <lgl>,
-## #   place_id <chr>, place_type <chr>, place_name <chr>, place_full_name <chr>,
-## #   country_code <chr>, country <chr>, bounding_box_coordinates <chr>,
-## #   bounding_box_type <chr>
+## #   quote_status_id <chr>, is_retweet <lgl>, retweet_status_id <chr> ...
 ```
 
 ---
@@ -320,12 +349,16 @@ rt
 
 
 ```r
-plain_tweets(rt$text[1:5])
+rt$text[1:5]
+## [1] "Dear #rstats – If R is executable from Microsoft Server, does that mean that it's now technically feasible to run a DDoS from R?"
+## [2] "Networkx #Datascience #Bigdata Tools is out! https://t.co/gASnKtH0bU Tweets via @CodeDocta @ijstokes @EwaldSchmidt #rstats"
+## [3] "#RStats —Engaging the tidyverse Clean Slate Protocol : https://t.co/mrjCI8YYdH"
+
+## strip formatting, URLs, mentions, hashtags, etc.
+plain_tweets(rt$text[1:5], include_hashtags = FALSE)
 ## [1] "dear if r is executable from microsoft server does that mean that its now technically feasible to run a ddos from r"
 ## [2] "networkx tools is out tweets via"
-## [3] "big data insights"
-## [4] "cran updates reins rnetlogo rsentiment"
-## [5] "engaging the tidyverse clean slate protocol"
+## [3] "engaging the tidyverse clean slate protocol"
 ```
 
 --- .dark3
@@ -334,15 +367,43 @@ plain_tweets(rt$text[1:5])
 
 
 ```r
-ts_plot(rt, "hours")
+## time series plot
+ts_plot(rt, by = "hours")
 ```
 
 ![](images/tsplothours.png)
 
 ---
 
+## Users data
+
+- With tweets data you also get data about the users via `users_data()`
+
+
+```r
+## extract users data from rt (tweets data)
+users_data(rt)
+## # A tibble: 300 x 36
+##               user_id                 name     screen_name
+##                 <chr>                <chr>           <chr>
+##  1           14460093                  Fr.            phnk
+##  2           92526801       John Letteboer      jletteboer
+##  3           89191817          Marty Wells BigDataInsights
+##  4          233585808 CRAN Package Updates CRANberriesFeed
+##  5 821976676842242050       Deborah Tannon   DeborahTannon
+##  6         2311645130     Analytics Vidhya AnalyticsVidhya
+##  7           15553592         Edward Egros EdwardEgrosFox4
+##  8          144592995           R-bloggers       Rbloggers
+##  9         3306901413         Geo.Appsmith     geoappsmith
+## 10           13074042          Julia Silge      juliasilge
+## # ... with 290 more rows, and 33 more variables: location <chr> ...
+```
+
+---
 
 ## Search by geocode
+
+- Geo-location searches using longitude,latitude,radius
 
 
 ```r

@@ -11,3 +11,4 @@ browseURL("../docs/slides.html")
 library(rtweet)
 library(ggplot2)
 
+usrs <- lookup_users(fds$user_id)
