@@ -36,6 +36,7 @@ University of Missouri</p>
 **Education and training**
 - PhD in Communication Studies from KU
 - Center for Research Methods & Data Analysis
+
 **Research topics**
 - Selective exposure, partisanship, new media, data journalism
 - Dissertation...
@@ -54,13 +55,13 @@ University of Missouri</p>
 
 ---
 
-## Agenda
-- Twitter APIs
+## Agenda for this talk
+- Quick intro to Twitter APIs
 - Getting started with rtweet
   - Authorization token(s)
   - Package resources
 
-- Quick tour of rtweet functions
+- Tour of rtweet functions
   - Friends/followers
   - Users/tweets
 
@@ -117,10 +118,16 @@ help(package = "rtweet")
 
 ## Installing and loading rtweet
 
+- Download rtweet from CRAN
+
 ```{r, eval=FALSE, cache=FALSE}
 ## download from CRAN
 install.packages("rtweet")
+```
 
+- Get the latest [dev] version from Github
+
+```{r, eval=FALSE, cache=FALSE}
 ## or download dev version from Github
 if (!"devtools" %in% installed.packages()) {
     install.packages("devtools")
@@ -134,7 +141,7 @@ library(rtweet)
 ---
 
 ## Create Twitter App
-- [https://apps.twitter.com](apps.twitter.com)
+- Go to: [https://apps.twitter.com](apps.twitter.com)
 - For call back enter `http://127.0.0.1:1410`
 
 ![](images/auth1.png)
@@ -178,7 +185,7 @@ twitter_token <- create_token(
 
 ```{r, eval=FALSE, cache=FALSE}
 ## path of home directory
-home_directory <- path.expand("~/")
+home_directory <- path.expand("~")
 
 ## combine with name for token
 file_name <- file.path(home_directory, "twitter_token.rds")
@@ -239,12 +246,28 @@ flw1
 ```{r, eval=FALSE, cache=FALSE}
 ## set page value using next cursor extractor
 page <- next_cursor(flw1)
+
 page
 ## [1] "1569708984537163520"
 
 ## use page value to continue where left off
 flw2 <- get_followers(
     "realdonaldtrump", n = 75000, page = page)
+```
+
+---
+
+## Manage rate limits
+
+- Use the `rate_limit` function
+
+```{r, eval=FALSE, cache=FALSE}
+rate_limit(get_tokens())[1:3, ]
+##                    query limit remaining       reset
+## 1             lists/list    15        15 14.975 mins
+## 2      lists/memberships    75        75 14.975 mins
+## 3 lists/subscribers/show    15        15 14.975 mins
+---
 ```
 
 ---

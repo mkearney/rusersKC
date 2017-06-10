@@ -47,8 +47,12 @@ University of Missouri</p>
 
 <ul>
 <li>PhD in Communication Studies from KU</li>
-<li>Center for Research Methods &amp; Data Analysis
-<strong>Research topics</strong></li>
+<li>Center for Research Methods &amp; Data Analysis</li>
+</ul>
+
+<p><strong>Research topics</strong></p>
+
+<ul>
 <li>Selective exposure, partisanship, new media, data journalism</li>
 <li>Dissertation...</li>
 </ul>
@@ -68,16 +72,16 @@ University of Missouri</p>
 </article>
 
 <article class="" id="slide-6" style="background:;">
-  <h3>Agenda</h3>
+  <h3>Agenda for this talk</h3>
   <ul>
-<li>Twitter APIs</li>
+<li>Quick intro to Twitter APIs</li>
 <li><p>Getting started with rtweet</p>
 
 <ul>
 <li>Authorization token(s)</li>
 <li>Package resources</li>
 </ul></li>
-<li><p>Quick tour of rtweet functions</p>
+<li><p>Tour of rtweet functions</p>
 
 <ul>
 <li>Friends/followers</li>
@@ -151,10 +155,19 @@ help(package = &quot;rtweet&quot;)
 
 <article class="" id="slide-11" style="background:;">
   <h3>Installing and loading rtweet</h3>
-  <pre><code class="r">## download from CRAN
-install.packages(&quot;rtweet&quot;)
+  <ul>
+<li>Download rtweet from CRAN</li>
+</ul>
 
-## or download dev version from Github
+<pre><code class="r">## download from CRAN
+install.packages(&quot;rtweet&quot;)
+</code></pre>
+
+<ul>
+<li>Get the latest [dev] version from Github</li>
+</ul>
+
+<pre><code class="r">## or download dev version from Github
 if (!&quot;devtools&quot; %in% installed.packages()) {
     install.packages(&quot;devtools&quot;)
 }
@@ -169,7 +182,7 @@ library(rtweet)
 <article class="" id="slide-12" style="background:;">
   <h3>Create Twitter App</h3>
   <ul>
-<li><a href="apps.twitter.com">https://apps.twitter.com</a></li>
+<li>Go to: <a href="apps.twitter.com">https://apps.twitter.com</a></li>
 <li>For call back enter <code>http://127.0.0.1:1410</code></li>
 </ul>
 
@@ -212,7 +225,7 @@ twitter_token &lt;- create_token(
 <article class="" id="slide-16" style="background:;">
   <h3>Save token</h3>
   <pre><code class="r">## path of home directory
-home_directory &lt;- path.expand(&quot;~/&quot;)
+home_directory &lt;- path.expand(&quot;~&quot;)
 
 ## combine with name for token
 file_name &lt;- file.path(home_directory, &quot;twitter_token.rds&quot;)
@@ -270,6 +283,7 @@ flw1
   <h3>Get more followers</h3>
   <pre><code class="r">## set page value using next cursor extractor
 page &lt;- next_cursor(flw1)
+
 page
 ## [1] &quot;1569708984537163520&quot;
 
@@ -281,6 +295,22 @@ flw2 &lt;- get_followers(
 </article>
 
 <article class="" id="slide-21" style="background:;">
+  <h3>Manage rate limits</h3>
+  <ul>
+<li>Use the <code>rate_limit</code> function</li>
+</ul>
+
+<pre><code class="r">rate_limit(get_tokens())[1:3, ]
+##                    query limit remaining       reset
+## 1             lists/list    15        15 14.975 mins
+## 2      lists/memberships    75        75 14.975 mins
+## 3 lists/subscribers/show    15        15 14.975 mins
+---
+</code></pre>
+
+</article>
+
+<article class="" id="slide-22" style="background:;">
   <h3>Get friends</h3>
   <pre><code class="r">## get list of accounts followed BY a user
 fds &lt;- get_friends(&quot;kearneymw&quot;)
@@ -306,7 +336,7 @@ next_cursor(fds)
 
 </article>
 
-<article class="" id="slide-22" style="background:;">
+<article class="" id="slide-23" style="background:;">
   <h3>Lookup users</h3>
   <pre><code class="r">## get users data for my friends
 usrs &lt;- lookup_users(fds$user_id)
@@ -334,7 +364,7 @@ usrs
 
 </article>
 
-<article class="" id="slide-23" style="background:;">
+<article class="" id="slide-24" style="background:;">
   <h3>Search tweets</h3>
   <pre><code class="r">rt &lt;- search_tweets(
     &quot;rstats&quot;, n = 300, include_rts = FALSE, exact = TRUE)
@@ -362,7 +392,7 @@ rt
 
 </article>
 
-<article class="" id="slide-24" style="background:;">
+<article class="" id="slide-25" style="background:;">
   <h3>Plain tweets</h3>
   <pre><code class="r">rt$text[1:5]
 ## [1] &quot;Dear #rstats – If R is executable from Microsoft Server, does that mean that it&#39;s now technically feasible to run a DDoS from R?&quot;
@@ -378,7 +408,7 @@ plain_tweets(rt$text[1:5], include_hashtags = FALSE)
 
 </article>
 
-<article class="dark3" id="slide-25" style="background:;">
+<article class="dark3" id="slide-26" style="background:;">
   <h3>Plot</h3>
   <pre><code class="r">## time series plot
 ts_plot(rt, by = &quot;hours&quot;)
@@ -388,7 +418,7 @@ ts_plot(rt, by = &quot;hours&quot;)
 
 </article>
 
-<article class="" id="slide-26" style="background:;">
+<article class="" id="slide-27" style="background:;">
   <h3>Users data</h3>
   <ul>
 <li>With tweets data you also get data about the users via <code>users_data()</code></li>
@@ -414,7 +444,7 @@ users_data(rt)
 
 </article>
 
-<article class="" id="slide-27" style="background:;">
+<article class="" id="slide-28" style="background:;">
   <h3>Search by geocode</h3>
   <ul>
 <li>Geo-location searches using longitude,latitude,radius</li>
@@ -439,7 +469,7 @@ for (i in seq_along(state_tweets)) {
 
 </article>
 
-<article class="dark3" id="slide-28" style="background:;">
+<article class="dark3" id="slide-29" style="background:;">
   <h3>&nbsp;</h3>
   <div style="margin-left: auto; margin:right: auto;">
 <img class="sentanalysis" src="images/statecomey.png" alt="statecomey">
@@ -447,7 +477,7 @@ for (i in seq_along(state_tweets)) {
 
 </article>
 
-<article class="" id="slide-29" style="background:;">
+<article class="" id="slide-30" style="background:;">
   <h3>Stream tweets</h3>
   <pre><code class="r">## comey stream
 comes &lt;- stream_tweets(&quot;comey,trump&quot;, timeout = 60 * 3)
@@ -462,7 +492,7 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="dark3" id="slide-30" style="background:;">
+<article class="dark3" id="slide-31" style="background:;">
   <h3>Sentiment analysis</h3>
   <p><br></p>
 
@@ -472,7 +502,7 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="dark3" id="slide-31" style="background:;">
+<article class="dark3" id="slide-32" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/worlddensity.png" alt=""></p>
 
@@ -480,13 +510,13 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="sentanalysis" id="slide-32" style="background:;">
+<article class="sentanalysis" id="slide-33" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/sentanalysisprimary.png" alt=""></p>
 
 </article>
 
-<article class="sentanalysis" id="slide-33" style="background:;">
+<article class="sentanalysis" id="slide-34" style="background:;">
   <h3>User networks</h3>
   <ul>
 <li>My dissertation tracked user networks during the
@@ -505,19 +535,19 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="sentanalysis" id="slide-34" style="background:;">
+<article class="sentanalysis" id="slide-35" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/ddr2.png" alt=""></p>
 
 </article>
 
-<article class="netanalysis" id="slide-35" style="background:;">
+<article class="netanalysis" id="slide-36" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/polrnetwork.png" alt=""></p>
 
 </article>
 
-<article class="" id="slide-36" style="background:;">
+<article class="" id="slide-37" style="background:;">
   <h3>rtweet not possible without:</h3>
   <ul>
 <li>httr</li>
@@ -527,7 +557,7 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="transition" id="slide-37" style="background:;">
+<article class="transition" id="slide-38" style="background:;">
   <h3>&nbsp;</h3>
   <h1 class="mytransition">That's it \o/<br><br>Thanks!</h1>
 
