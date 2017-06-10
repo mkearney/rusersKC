@@ -15,33 +15,40 @@ knit        : slidify::knit2slides
 <br>
 <br>
 
-<h1 class="mytitle">Data Science and "Big Data" in<br>Communication Research</h1>
+<h1 class="mytitle">Everyone should play with Twitter data:<br>An
+introduction to rtweet</h1>
 
 <p class="titleinfo">Michael W. Kearney<br>
-Department of Communication Studies<br>
-Center for Research Methods & Data Analysis<br>
-University of Kansas</p>
+Assistant Professor<br>
+School of Journalism<br>
+Informatics Institute<br>
+University of Missouri</p>
 
 ---
 
 ## Some background
-**Research interests**
-- How do people navigate political information in digital media
-  environments?
+**Education**
+- Completed my PhD in communication from Kansas
+- Grad minor in quantitative psychology
+- Worked for Center for Research Methods and Data Analysis
 
-**Problems**
-- Social media use is hard to measure
-- People are no good at recalling exposure to political media <span
-  class="cite">(Prior, 2010; Prior, 2015)</span>
-
-**New data sources**
-- Real-time and digital-sources of data
+**Research**
+- I'm interested in partisanship and new media
+- Dissertation: A network based approach to estimating partisanship
+  and analyzing change in network polarization during the 2016 general
+  election
 
 ---
 
 ## &nbsp;
 
 ![](images/rtweetpkg.png)
+
+---
+
+## &nbsp;
+
+![](images/diss.png)
 
 ---
 
