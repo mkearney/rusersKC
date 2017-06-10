@@ -279,6 +279,25 @@ comes <- tibble::as_tibble(cbind(comes, sa))
 
 ---
 
+
+```r
+## load state data
+data("state")
+
+## initialize vector
+state_tweets <- vector("list", 50)
+
+## loop through 50 states
+for (i in seq_along(state_tweets)) {
+    state_tweets[[i]] <- search_tweets(
+        paste0("comey OR trump geocode:", state.center$y[i], ",",
+               state.center$x[i], ",", "50mi"),
+    )
+}
+```
+
+---
+
 ## Packages
 - httr
 - jsonlite

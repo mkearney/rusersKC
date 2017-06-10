@@ -314,6 +314,25 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 </article>
 
 <article class="" id="slide-26" style="background:;">
+  <h3>NA</h3>
+  <pre><code class="r">## load state data
+data(&quot;state&quot;)
+
+## initialize vector
+state_tweets &lt;- vector(&quot;list&quot;, 50)
+
+## loop through 50 states
+for (i in seq_along(state_tweets)) {
+    state_tweets[[i]] &lt;- search_tweets(
+        paste0(&quot;comey OR trump geocode:&quot;, state.center$y[i], &quot;,&quot;,
+               state.center$x[i], &quot;,&quot;, &quot;50mi&quot;),
+    )
+}
+</code></pre>
+
+</article>
+
+<article class="" id="slide-27" style="background:;">
   <h3>Packages</h3>
   <ul>
 <li>httr</li>
