@@ -5,3 +5,4 @@ if (!"slidify" %in% installed.packages()) {
 }
 
 slidify::knit2slides("../docs/index.Rmd")
+
