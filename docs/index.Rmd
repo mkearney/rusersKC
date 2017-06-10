@@ -8,6 +8,12 @@ hitheme     : monokai
 knit        : slidify::knit2slides
 --- .transition
 
+<style>
+pre .comment, pre .java .annotation, pre .python .decorator, pre .template_comment, pre .pi, pre .doctype, pre .deletion, pre .shebang, pre .apache .sqbracket, pre .tex .formula {
+color: #999;
+}
+</style>
+
 <h2></h2>
 
 <link rel="stylesheet" href="./frameworks/html5slides/default/html5slides.css">
@@ -508,9 +514,4 @@ comes <- tibble::as_tibble(cbind(comes, sa))
 
 <h1 class="mytransition">That's it \o/<br><br>Thanks!</h1>
 
-<style>
-pre .comment {
-color: #999;
-}
-</style>
 
