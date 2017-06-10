@@ -33,6 +33,15 @@ University of Missouri</p>
 </article>
 
 <article class="" id="slide-2" style="background:;">
+  <h3>Get these slides</h3>
+  <ul>
+<li>Repository: <a href="https://github.com/mkearney/rusersKC">https://github.com/mkearney/rusersKC</a></li>
+<li>Slides: <a href="https://mkearney.github.io/rusersKC">https://mkearney.github.io/rusersKC</a></li>
+</ul>
+
+</article>
+
+<article class="" id="slide-3" style="background:;">
   <h3>My background</h3>
   <p><strong>Education</strong></p>
 
@@ -54,19 +63,19 @@ University of Missouri</p>
 
 </article>
 
-<article class="" id="slide-3" style="background:;">
+<article class="" id="slide-4" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/diss.png" alt=""></p>
 
 </article>
 
-<article class="" id="slide-4" style="background:;">
+<article class="" id="slide-5" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/rtweetpkg.png" alt=""></p>
 
 </article>
 
-<article class="" id="slide-5" style="background:;">
+<article class="" id="slide-6" style="background:;">
   <h3>Agenda</h3>
   <ul>
 <li>Twitter APIs</li>
@@ -86,13 +95,13 @@ University of Missouri</p>
 
 </article>
 
-<article class="transition" id="slide-6" style="background:;">
+<article class="transition" id="slide-7" style="background:;">
   <h3>&nbsp;</h3>
   <h1 class="mytransition">Twitter APIs</h1>
 
 </article>
 
-<article class="" id="slide-7" style="background:;">
+<article class="" id="slide-8" style="background:;">
   <h3>Twitter data</h3>
   <ul>
 <li><p>Twitter makes data available via Application Program Interfaces
@@ -111,7 +120,7 @@ University of Missouri</p>
 
 </article>
 
-<article class="" id="slide-8" style="background:;">
+<article class="" id="slide-9" style="background:;">
   <h3>Package resources</h3>
   <ul>
 <li>Website: <a href="https://mkearney.github.io/rtweet">mkearney.github.io/rtweet</a></li>
@@ -130,13 +139,13 @@ vignette(topic = &quot;stream&quot;, package = &quot;rtweet&quot;)
 
 </article>
 
-<article class="transition" id="slide-9" style="background:;">
+<article class="transition" id="slide-10" style="background:;">
   <h3>&nbsp;</h3>
   <h1 class="mytransition">Getting started with rtweet</h1>
 
 </article>
 
-<article class="" id="slide-10" style="background:;">
+<article class="" id="slide-11" style="background:;">
   <h3>Installing and loading rtweet</h3>
   <pre><code class="r">## download from CRAN
 install.packages(&quot;rtweet&quot;)
@@ -153,7 +162,7 @@ library(rtweet)
 
 </article>
 
-<article class="" id="slide-11" style="background:;">
+<article class="" id="slide-12" style="background:;">
   <h3>Create Twitter App</h3>
   <ul>
 <li><a href="apps.twitter.com">https://apps.twitter.com</a></li>
@@ -164,19 +173,19 @@ library(rtweet)
 
 </article>
 
-<article class="" id="slide-12" style="background:;">
+<article class="" id="slide-13" style="background:;">
   <h3>Keys and access tokens</h3>
   <p><img src="images/auth2.png" alt=""></p>
 
 </article>
 
-<article class="" id="slide-13" style="background:;">
+<article class="" id="slide-14" style="background:;">
   <h3>Copy keys</h3>
   <p><img src="images/auth3.png" alt=""></p>
 
 </article>
 
-<article class="" id="slide-14" style="background:;">
+<article class="" id="slide-15" style="background:;">
   <h3>Create token</h3>
   <pre><code class="r">## whatever name you assigned to your created app
 appname &lt;- &quot;rtweet_token&quot;
@@ -196,7 +205,7 @@ twitter_token &lt;- create_token(
 
 </article>
 
-<article class="" id="slide-15" style="background:;">
+<article class="" id="slide-16" style="background:;">
   <h3>Save token</h3>
   <pre><code class="r">## path of home directory
 home_directory &lt;- path.expand(&quot;~/&quot;)
@@ -210,7 +219,7 @@ saveRDS(twitter_token, file = file_name)
 
 </article>
 
-<article class="" id="slide-16" style="background:;">
+<article class="" id="slide-17" style="background:;">
   <h3>Set environment variable</h3>
   <pre><code class="r">## On my mac, the .Renviron text looks like this:
 ##     TWITTER_PAT=/Users/mwk/twitter_token.rds
@@ -225,13 +234,13 @@ cat(paste0(&quot;TWITTER_PAT=&quot;, file_name),
 
 </article>
 
-<article class="transition" id="slide-17" style="background:;">
+<article class="transition" id="slide-18" style="background:;">
   <h3>&nbsp;</h3>
   <h1 class="mytransition">rtweet functions</h1>
 
 </article>
 
-<article class="" id="slide-18" style="background:;">
+<article class="" id="slide-19" style="background:;">
   <h3>Get followers</h3>
   <pre><code class="r">## get most recent 75k followers
 flw1 &lt;- get_followers(&quot;realdonaldtrump&quot;, n = 75000)
@@ -253,7 +262,7 @@ flw1
 
 </article>
 
-<article class="" id="slide-19" style="background:;">
+<article class="" id="slide-20" style="background:;">
   <h3>Get more followers</h3>
   <pre><code class="r">## set page value using next cursor extractor
 page &lt;- next_cursor(flw1)
@@ -267,7 +276,7 @@ flw2 &lt;- get_followers(
 
 </article>
 
-<article class="" id="slide-20" style="background:;">
+<article class="" id="slide-21" style="background:;">
   <h3>Get friends</h3>
   <pre><code class="r">## get list of accounts followed BY a user
 fds &lt;- get_friends(&quot;kearneymw&quot;)
@@ -293,7 +302,7 @@ next_cursor(fds)
 
 </article>
 
-<article class="" id="slide-21" style="background:;">
+<article class="" id="slide-22" style="background:;">
   <h3>Search tweets</h3>
   <pre><code class="r">rt &lt;- search_tweets(
     &quot;rstats&quot;, n = 300, include_rts = FALSE, exact = TRUE)
@@ -329,7 +338,7 @@ rt
 
 </article>
 
-<article class="" id="slide-22" style="background:;">
+<article class="" id="slide-23" style="background:;">
   <h3>Plain tweets</h3>
   <pre><code class="r">plain_tweets(rt$text[1:5])
 ## [1] &quot;dear if r is executable from microsoft server does that mean that its now technically feasible to run a ddos from r&quot;
@@ -341,7 +350,7 @@ rt
 
 </article>
 
-<article class="dark3" id="slide-23" style="background:;">
+<article class="dark3" id="slide-24" style="background:;">
   <h3>Plot</h3>
   <pre><code class="r">ts_plot(rt, &quot;hours&quot;)
 </code></pre>
@@ -350,8 +359,37 @@ rt
 
 </article>
 
-<article class="" id="slide-24" style="background:;">
-  <h3>Streaming</h3>
+<article class="" id="slide-25" style="background:;">
+  <h3>Search by geocode</h3>
+  <pre><code class="r">## load state data
+data(&quot;state&quot;)
+
+## initialize vector
+state_tweets &lt;- vector(&quot;list&quot;, 50)
+
+## loop through 50 states
+for (i in seq_along(state_tweets)) {
+    state_tweets[[i]] &lt;- search_tweets(
+        paste0(&quot;comey OR trump geocode:&quot;,
+               state.center$y[i], &quot;,&quot;,
+               state.center$x[i], &quot;,&quot;,
+               &quot;50mi&quot;),
+    )
+}
+</code></pre>
+
+</article>
+
+<article class="dark3" id="slide-26" style="background:;">
+  <h3>&nbsp;</h3>
+  <div style="margin-left: auto; margin:right: auto;">
+<img class="sentanalysis" src="images/statecomey.png" alt="statecomey">
+</div>
+
+</article>
+
+<article class="" id="slide-27" style="background:;">
+  <h3>Stream tweets</h3>
   <pre><code class="r">## comey stream
 comes &lt;- stream_tweets(&quot;comey,trump&quot;, timeout = 60 * 3)
 
@@ -365,7 +403,7 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="dark3" id="slide-25" style="background:;">
+<article class="dark3" id="slide-28" style="background:;">
   <h3>Sentiment analysis</h3>
   <p><br></p>
 
@@ -375,15 +413,7 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="dark3" id="slide-26" style="background:;">
-  <h3>&nbsp;</h3>
-  <div style="margin-left: auto; margin:right: auto;">
-<img class="sentanalysis" src="images/statecomey.png" alt="statecomey">
-</div>
-
-</article>
-
-<article class="dark3" id="slide-27" style="background:;">
+<article class="dark3" id="slide-29" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/worlddensity.png" alt=""></p>
 
@@ -391,23 +421,23 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="sentanalysis" id="slide-28" style="background:;">
+<article class="sentanalysis" id="slide-30" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/sentanalysisprimary.png" alt=""></p>
 
 </article>
 
-<article class="sentanalysis" id="slide-29" style="background:;">
+<article class="sentanalysis" id="slide-31" style="background:;">
   <h3>User networks</h3>
   <ul>
-<li>In my dissertation, I tracked user networks on Twitter during the
+<li>My dissertation tracked user networks during the
 2016 election</li>
-<li>Republican group: users who followed one or more of the following:
+<li>Republicans were followers of
 
 <ul>
 <li>Sean Hannity, Sarah Palin, Fox News Politics, and Drudge Report</li>
 </ul></li>
-<li>Democrat group: users who followed one or more of the following:
+<li>Democrat were followers of
 
 <ul>
 <li>Rachel Maddow, Paul Krugman, HuffPost Politics, and Salon</li>
@@ -416,50 +446,31 @@ comes &lt;- tibble::as_tibble(cbind(comes, sa))
 
 </article>
 
-<article class="sentanalysis" id="slide-30" style="background:;">
+<article class="sentanalysis" id="slide-32" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/ddr2.png" alt=""></p>
 
 </article>
 
-<article class="netanalysis" id="slide-31" style="background:;">
+<article class="netanalysis" id="slide-33" style="background:;">
   <h3>&nbsp;</h3>
   <p><img src="images/polrnetwork.png" alt=""></p>
 
 </article>
 
-<article class="transition" id="slide-32" style="background:;">
-  <h3>&nbsp;</h3>
-  <h1 class="mytransition">That's it \o/<br><br>Thanks!</h1>
-
-</article>
-
-<article class="" id="slide-33" style="background:;">
-  <h3>NA</h3>
-  <pre><code class="r">## load state data
-data(&quot;state&quot;)
-
-## initialize vector
-state_tweets &lt;- vector(&quot;list&quot;, 50)
-
-## loop through 50 states
-for (i in seq_along(state_tweets)) {
-    state_tweets[[i]] &lt;- search_tweets(
-        paste0(&quot;comey OR trump geocode:&quot;, state.center$y[i], &quot;,&quot;,
-               state.center$x[i], &quot;,&quot;, &quot;50mi&quot;),
-    )
-}
-</code></pre>
-
-</article>
-
 <article class="" id="slide-34" style="background:;">
-  <h3>Packages</h3>
+  <h3>rtweet not possible without:</h3>
   <ul>
 <li>httr</li>
 <li>jsonlite</li>
 <li>devtools</li>
 </ul>
+
+</article>
+
+<article class="transition" id="slide-35" style="background:;">
+  <h3>&nbsp;</h3>
+  <h1 class="mytransition">That's it \o/<br><br>Thanks!</h1>
 
 </article>
 

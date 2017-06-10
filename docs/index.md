@@ -26,6 +26,12 @@ University of Missouri</p>
 
 ---
 
+## Get these slides
+- Repository: [https://github.com/mkearney/rusersKC](https://github.com/mkearney/rusersKC)
+- Slides: [https://mkearney.github.io/rusersKC](https://mkearney.github.io/rusersKC)
+
+---
+
 ## My background
 **Education**
 - PhD in Communication Studies from KU
@@ -335,7 +341,39 @@ ts_plot(rt, "hours")
 
 ---
 
-## Streaming
+
+## Search by geocode
+
+
+```r
+## load state data
+data("state")
+
+## initialize vector
+state_tweets <- vector("list", 50)
+
+## loop through 50 states
+for (i in seq_along(state_tweets)) {
+    state_tweets[[i]] <- search_tweets(
+        paste0("comey OR trump geocode:",
+               state.center$y[i], ",",
+               state.center$x[i], ",",
+               "50mi"),
+    )
+}
+```
+
+--- .dark3
+
+## &nbsp;
+
+<div style="margin-left: auto; margin:right: auto;">
+<img class="sentanalysis" src="images/statecomey.png" alt="statecomey">
+</div>
+
+---
+
+## Stream tweets
 
 
 ```r
@@ -358,13 +396,6 @@ comes <- tibble::as_tibble(cbind(comes, sa))
 <img class="sentanalysis" src="images/comey.png" alt="comey">
 </div>
 
---- .dark3
-
-## &nbsp;
-
-<div style="margin-left: auto; margin:right: auto;">
-<img class="sentanalysis" src="images/statecomey.png" alt="statecomey">
-</div>
 
 --- .dark3
 
@@ -383,11 +414,11 @@ comes <- tibble::as_tibble(cbind(comes, sa))
 --- .sentanalysis
 
 ## User networks
-- In my dissertation, I tracked user networks on Twitter during the
+- My dissertation tracked user networks during the
   2016 election
-- Republican group: users who followed one or more of the following:
+- Republicans were followers of
   - Sean Hannity, Sarah Palin, Fox News Politics, and Drudge Report
-- Democrat group: users who followed one or more of the following:
+- Democrat were followers of
   - Rachel Maddow, Paul Krugman, HuffPost Politics, and Salon
 
 --- .sentanalysis
@@ -402,6 +433,12 @@ comes <- tibble::as_tibble(cbind(comes, sa))
 
 ![](images/polrnetwork.png)
 
+---
+
+## rtweet not possible without:
+- httr
+- jsonlite
+- devtools
 
 
 --- .transition
@@ -410,29 +447,3 @@ comes <- tibble::as_tibble(cbind(comes, sa))
 
 <h1 class="mytransition">That's it \o/<br><br>Thanks!</h1>
 
-
----
-
-
-```r
-## load state data
-data("state")
-
-## initialize vector
-state_tweets <- vector("list", 50)
-
-## loop through 50 states
-for (i in seq_along(state_tweets)) {
-    state_tweets[[i]] <- search_tweets(
-        paste0("comey OR trump geocode:", state.center$y[i], ",",
-               state.center$x[i], ",", "50mi"),
-    )
-}
-```
-
----
-
-## Packages
-- httr
-- jsonlite
-- devtools
